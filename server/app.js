@@ -27,7 +27,9 @@ app.use('/assets', express.static(path.resolve(`${__dirname}/../client/`)));
 
 app.use(compression());
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.use(bodyParser.json());
 
@@ -47,4 +49,3 @@ app.listen(port, (err) => {
   }
   console.log(`Listening on port ${port}`);
 });
-
