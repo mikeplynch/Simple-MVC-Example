@@ -4,15 +4,19 @@ const models = require('../models');
 // get the Cat model
 const Cat = models.Cat.CatModel;
 
+<<<<<<< HEAD
 // get the Dog model
 const Dog = models.Dog.DogModel;
 
+=======
+>>>>>>> refs/remotes/origin/master
 // default fake data so that we have something to work with until we make a real Cat
 const defaultData = {
   name: 'unknown',
   bedsOwned: 0,
 };
 
+<<<<<<< HEAD
 const defaultDog = {
   name: 'unknown',
   breed: 'unknown',
@@ -24,6 +28,11 @@ let lastAdded = new Cat(defaultData);
 
 let lastDog = new Dog(defaultDog);
 
+=======
+// object for us to keep track of the last Cat we made and dynamically update it sometimes
+let lastAdded = new Cat(defaultData);
+
+>>>>>>> refs/remotes/origin/master
 // function to handle requests to the main page
 // controller functions in Express receive the full HTTP request
 // and a pre-filled out response object to send
@@ -52,10 +61,13 @@ const readAllCats = (req, res, callback) => {
   // That limits your search to only things that match the criteria
   // The find function returns an array of matching objects
   Cat.find(callback);
+<<<<<<< HEAD
 };
 
 const readAllDogs = (req, res, callback) => {
   Dog.find(callback);
+=======
+>>>>>>> refs/remotes/origin/master
 };
 
 
@@ -68,9 +80,13 @@ const readCat = (req, res) => {
   // With Mongoose's find functions, you will get an err and doc(s) back
   const callback = (err, doc) => {
     if (err) {
+<<<<<<< HEAD
       return res.json({
         err
       }); // if error, return it
+=======
+      return res.json({ err }); // if error, return it
+>>>>>>> refs/remotes/origin/master
     }
 
     // return success
@@ -83,6 +99,7 @@ const readCat = (req, res) => {
   // Behind the scenes this runs the findOne method.
   // You can find the findByName function in the model file.
   Cat.findByName(name1, callback);
+<<<<<<< HEAD
 };
 
 const readDog = (req, res) => {
@@ -99,6 +116,8 @@ const readDog = (req, res) => {
   };
 
   Dog.findByName(name1, callback);
+=======
+>>>>>>> refs/remotes/origin/master
 };
 
 // function to handle requests to the page1 page
@@ -109,6 +128,7 @@ const hostPage1 = (req, res) => {
   // With Mongoose's find functions, you will get an err and doc(s) back
   const callback = (err, docs) => {
     if (err) {
+<<<<<<< HEAD
       return res.json({
         err
       }); // if error, return it
@@ -120,6 +140,15 @@ const hostPage1 = (req, res) => {
     });
   };
 
+=======
+      return res.json({ err }); // if error, return it
+    }
+
+    // return success
+    return res.render('page1', { cats: docs });
+  };
+
+>>>>>>> refs/remotes/origin/master
   readAllCats(req, res, callback);
 };
 
@@ -140,12 +169,21 @@ const hostPage2 = (req, res) => {
 // controller functions in Express receive the full HTTP request
 // and a pre-filled out response object to send
 const hostPage3 = (req, res) => {
+<<<<<<< HEAD
   // res.render takes a name of a page to render.
   // These must be in the folder you specified as views in your main app.js file
   // Additionally, you don't need .jade because you registered the file type
   // in the app.js as jade. Calling res.render('index')
   // actually calls index.jade. A second parameter of JSON can be passed
   // into the jade to be used as variables with #{varName}
+=======
+    // res.render takes a name of a page to render.
+    // These must be in the folder you specified as views in your main app.js file
+    // Additionally, you don't need .jade because you registered the file type
+    // in the app.js as jade. Calling res.render('index')
+    // actually calls index.jade. A second parameter of JSON can be passed
+    // into the jade to be used as variables with #{varName}
+>>>>>>> refs/remotes/origin/master
   res.render('page3');
 };
 
@@ -156,6 +194,7 @@ const getName = (req, res) => {
   // res.json returns json to the page.
   // Since this sends back the data through HTTP
   // you can't send any more data to this user until the next response
+<<<<<<< HEAD
   res.json({
     name: lastAdded.name
   });
@@ -167,6 +206,11 @@ const getDogName = (req, res) => {
   });
 }
 
+=======
+  res.json({ name: lastAdded.name });
+};
+
+>>>>>>> refs/remotes/origin/master
 // function to handle a request to set the name
 // controller functions in Express receive the full HTTP request
 // and get a pre-filled out response object to send
@@ -179,9 +223,13 @@ const setName = (req, res) => {
   if (!req.body.firstname || !req.body.lastname || !req.body.beds) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
+<<<<<<< HEAD
     return res.status(400).json({
       error: 'firstname,lastname and beds are all required'
     });
+=======
+    return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
+>>>>>>> refs/remotes/origin/master
   }
 
   // if required fields are good, then set name
@@ -204,6 +252,7 @@ const setName = (req, res) => {
     // This way we can update it dynamically
     lastAdded = newCat;
     // return success
+<<<<<<< HEAD
     res.json({
       name: lastAdded.name,
       beds: lastAdded.bedsOwned
@@ -214,10 +263,18 @@ const setName = (req, res) => {
   savePromise.catch((err) => res.json({
     err
   }));
+=======
+    res.json({ name: lastAdded.name, beds: lastAdded.bedsOwned });
+  });
+
+  // if error, return it
+  savePromise.catch((err) => res.json({ err }));
+>>>>>>> refs/remotes/origin/master
 
   return res;
 };
 
+<<<<<<< HEAD
 const setDogName = (req, res) => {
   if (!req.body.name || !req.body.breed || !req.body.age) {
     return res.status(400).json({
@@ -254,6 +311,8 @@ const setDogName = (req, res) => {
   return res;
 };
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 // function to handle requests search for a name and return the object
 // controller functions in Express receive the full HTTP request
@@ -282,14 +341,19 @@ const searchName = (req, res) => {
   return Cat.findByName(req.query.name, (err, doc) => {
     // errs, handle them
     if (err) {
+<<<<<<< HEAD
       return res.json({
         err
       }); // if error, return it
+=======
+      return res.json({ err }); // if error, return it
+>>>>>>> refs/remotes/origin/master
     }
 
     // if no matches, let them know
     // (does not necessarily have to be an error since technically it worked correctly)
     if (!doc) {
+<<<<<<< HEAD
       return res.json({
         error: 'No cats found'
       });
@@ -344,6 +408,16 @@ const increaseAge = (req, res) => {
   });
 }
 
+=======
+      return res.json({ error: 'No cats found' });
+    }
+
+    // if a match, send the match back
+    return res.json({ name: doc.name, beds: doc.bedsOwned });
+  });
+};
+
+>>>>>>> refs/remotes/origin/master
 // function to handle a request to update the last added object
 // this PURELY exists to show you how to update a model object
 // Normally for an update, you'd get data from the client,
@@ -364,6 +438,7 @@ const updateLast = (req, res) => {
   const savePromise = lastAdded.save();
 
   // send back the name as a success for now
+<<<<<<< HEAD
   savePromise.then(() => res.json({
     name: lastAdded.name,
     beds: lastAdded.bedsOwned
@@ -373,6 +448,12 @@ const updateLast = (req, res) => {
   savePromise.catch((err) => res.json({
     err
   }));
+=======
+  savePromise.then(() => res.json({ name: lastAdded.name, beds: lastAdded.bedsOwned }));
+
+  // if save error, just return an error for now
+  savePromise.catch((err) => res.json({ err }));
+>>>>>>> refs/remotes/origin/master
 };
 
 // function to handle a request to any non-real resources (404)
